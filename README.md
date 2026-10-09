@@ -23,3 +23,6 @@ The CPU uses a lightweight weighted heuristic. It does not learn from previous m
 - **When no card fits:** it draws one card, plays it if it matches, or ends its turn.
 
 This makes the CPU reactive and understandable, while leaving room to improve its strategy later.
+
+##
+link:: https://mou-004.github.io/pokemon-card-game/
