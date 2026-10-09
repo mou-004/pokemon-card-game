@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b100f" />
+  <meta name="description" content="A fast color-and-number card game. Match your cards and empty your hand to win." />
+  <title>PokéMatch — Card Arena</title>
+  <link rel="preconnect" href="https://pokeapi.co" />
+  <link rel="preconnect" href="https://raw.githubusercontent.com" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="PokéMatch home"><span class="brand-ball"><i></i></span><span>POKÉ<span>MATCH</span></span></a>
+      <div class="top-status"><span class="status-dot"></span> ONLINE <b>/</b> CARD ARENA</div>
+      <div class="header-actions"><span class="game-code">MATCH <b>#<span id="match-number">001</span></b></span><button id="new-game" class="new-game">↻ <span>NEW GAME</span></button></div>
+    </header>
+
+    <section class="intro-row">
+      <div><div class="eyebrow"><span></span> QUICK MATCH · CPU RIVALS</div><h1>Draw. Match. <em>Outplay.</em></h1><p>Match the energy or number and empty your hand first.</p></div>
+      <div class="intro-controls">
+        <div class="player-choice" role="group" aria-label="Choose number of players"><span>PLAYERS</span><button class="selected" data-player-count="2" aria-pressed="true">2</button><button data-player-count="4" aria-pressed="false">4</button></div>
+      </div>
+    </section>
+
+    <section class="arena" aria-label="Card game arena">
+      <div class="arena-topline"><span><i class="arena-pulse"></i> QUICK MATCH</span><span id="turn-label">LOADING CARDS</span><span id="seat-label">2 SEATS</span></div>
+
+      <div id="loading-state" class="loading-state"><span class="spinner"></span><strong>Shuffling the deck…</strong><small>Getting your cards ready</small></div>
+      <div id="error-state" class="error-state" hidden><span class="error-symbol">!</span><div><strong>Couldn’t load the Pokémon cards.</strong><small>Check your connection, then give it another try.</small></div><button id="retry">RETRY ↗</button></div>
+
+      <div id="game-table" class="game-table" hidden>
+        <div class="opponent-zone"><div class="opponents-row" id="opponent-hand" aria-label="Rival hands"></div></div>
+
+        <div class="center-zone">
+          <div class="table-glow"></div>
+          <div class="game-status" id="game-status" aria-live="polite">Your move — play a matching card or draw.</div>
+          <div class="piles">
+            <button id="draw-pile" class="draw-pile" aria-label="Draw a card"><span class="deck-stack"><i></i><i></i><i></i><b><span class="mini-ball">◉</span></b></span><strong>DRAW</strong><small id="deck-count">— LEFT</small></button>
+            <div class="pile-divider"><span>OR</span></div>
+            <div class="discard-wrap"><div id="discard-pile" class="discard-pile"></div><span class="discard-label">PLAY HERE</span></div>
+          </div>
+          <div id="wild-picker" class="wild-picker" hidden><strong>CHOOSE THE NEXT ENERGY</strong><div id="wild-options" class="wild-options"></div></div>
+        </div>
+
+        <div class="player-zone">
+          <div class="player-row">
+            <div class="player-badge"><span class="player-avatar">Y</span><span><b>YOU</b><small>PLAYER</small></span><i id="player-turn-dot"></i></div>
+            <div class="hand-count"><span id="player-count">7</span> CARDS IN HAND</div>
+            <div class="hand-actions"><button id="call-button" class="call-button" hidden>CALL OUT!</button><button id="end-turn" class="end-turn" hidden>END TURN <b>↗</b></button></div>
+          </div>
+          <div id="player-hand" class="player-hand" aria-label="Your cards"></div>
+          <div class="hand-hint"><span>↖</span> PLAY A CARD THAT MATCHES THE TOP CARD BY ENERGY OR NUMBER <span>↗</span></div>
+        </div>
+      </div>
+
+      <div class="arena-footer"><span>✦ <b>THE CARD ARENA</b> · EVERY MOVE COUNTS</span><span>2 PLAYERS <i>·</i> 1 DECK <i>·</i> NO MERCY</span></div>
+    </section>
+
+    <footer class="page-footer"><span>POKÉMATCH <b>©</b> 2026</span><span>PLAY FAIR <i>·</i> PLAY FAST</span></footer>
+  </main>
+
+  <div id="result-modal" class="modal-backdrop" hidden><section class="result-modal" role="dialog" aria-modal="true" aria-labelledby="result-title"><div id="result-spark" class="result-spark">✦</div><div class="eyebrow">MATCH COMPLETE</div><h2 id="result-title">Victory!</h2><p id="result-copy">You played every card.</p><button id="play-again">PLAY AGAIN <span>↗</span></button></section></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
